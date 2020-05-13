@@ -18,4 +18,4 @@ Route::get('/', function () {
 });
  */
 
-Route::get('/', 'PagesControllers@index');
+Route::get('/', 'PagesControllers@index'); 
