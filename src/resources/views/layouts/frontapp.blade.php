@@ -24,12 +24,13 @@
     @include('inc.header')
 	<!-- /Header -->
 	<div class="container">
+        @include('inc.messages')
         @yield('content')
     </div>
     <!-- /container -->
     <div class="container">
         <footer id="home" class="clearfix">
-            <p>© 2020 BuildForSDG Team-049 MHAD</p>
+            <p>© <?=@date('Y');?> BuildForSDG Team-049 MHAD</p>
             <ul>
                 <li><a href="#" class="animated_link">Admin Login</a></li>
                 <li><a href="#" class="animated_link">Doctor Login</a></li>

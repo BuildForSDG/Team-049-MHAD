@@ -12,10 +12,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/**
+/*
 Route::get('/', function () {
     return view('welcome');
 });
- */
-
-Route::get('/', 'PagesControllers@index'); 
+ 
+if ($request->is('admin/*')) {
+    //
+}
+Route::get('dashboard', function () {
+    return redirect('home/dashboard');
+});
+return redirect()->route('login');
+return redirect()->action(
+    'UserController@profile', ['id' => 1]
+);
+*/
+Route::get('/', 'PagesControllers@index');
