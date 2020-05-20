@@ -16,7 +16,7 @@ class CreateMhadPhqTestsTable extends Migration
         Schema::create('mhad_phq_tests', function (Blueprint $table) {
             $table->id();
             $table->longText('test_question');
-            $table->string('status');
+            $table->char('status', 4);
             $table->timestamps();
         });
     }

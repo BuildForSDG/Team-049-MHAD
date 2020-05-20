@@ -15,10 +15,10 @@ class CreateMhadPhqAnswersTable extends Migration
     {
         Schema::create('mhad_phq_answers', function (Blueprint $table) {
             $table->id();
-            $table->string('qid')->index();
+            $table->unsignedInteger('qid')->index();
             $table->text('answer');
             $table->string('scorevalue');
-            $table->string('status');
+            $table->char('status', 4);
         });
     }
 

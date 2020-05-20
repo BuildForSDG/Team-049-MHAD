@@ -15,12 +15,12 @@ class CreateMhadPatientComplaintsTable extends Migration
     {
         Schema::create('mhad_patient_complaints', function (Blueprint $table) {
             $table->id();
-            $table->string('pregNo')->index();
-            $table->string('docRegNo')->index();
+            $table->string('pregNo', 100)->index();
+            $table->string('docRegNo', 100)->index();
             $table->text('complainTitle');
             $table->longText('complainBody');
             $table->timestamp('complainDate')->useCurrent();
-            $table->string('complainStatus');
+            $table->char('complainStatus', 4);
         });
     }
 

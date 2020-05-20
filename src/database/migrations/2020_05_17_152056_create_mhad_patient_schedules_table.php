@@ -15,13 +15,13 @@ class CreateMhadPatientSchedulesTable extends Migration
     {
         Schema::create('mhad_patient_schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('pregNo')->index();
-            $table->string('docRegNo')->index();
-            $table->string('schDate');
+            $table->string('pregNo', 100)->index();
+            $table->string('docRegNo', 100)->index();
+            $table->date('schDate');
             $table->mediumText('schVenue');
             $table->longText('schPurpose');
             $table->longText('docComment');
-            $table->string('schStatus');
+            $table->char('schStatus', 4);
         });
     }
 

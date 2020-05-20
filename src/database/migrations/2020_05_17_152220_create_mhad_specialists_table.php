@@ -15,18 +15,18 @@ class CreateMhadSpecialistsTable extends Migration
     {
         Schema::create('mhad_specialists', function (Blueprint $table) {
             $table->id();
-            $table->string('docRegNo')->unique();
-            $table->string('fullName');
-            $table->string('emailAddress')->unique();
-            $table->string('password');
-            $table->string('occupation');
+            $table->string('docRegNo', 100)->unique();
+            $table->string('fullName', 100);
+            $table->string('emailAddress', 50)->unique();
+            $table->string('password', 100);
+            $table->string('occupation', 100);
             $table->string('specialty');
-            $table->string('gender')->index();
-            $table->string('phoneNumber');
-            $table->string('age');
+            $table->string('gender', 50)->index();
+            $table->string('phoneNumber', 50);
+            $table->string('age', 20);
             $table->timestamp('dateRegistered')->useCurrent();
-            $table->string('activationStatus');
-            $table->string('status');
+            $table->char('activationStatus', 4);
+            $table->char('status', 4);
         });
     }
 

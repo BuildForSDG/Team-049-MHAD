@@ -15,17 +15,17 @@ class CreateMhadPatientsTable extends Migration
     {
         Schema::create('mhad_patients', function (Blueprint $table) {
             $table->id();
-            $table->string('pregNo')->unique();
+            $table->string('pregNo', 100)->unique();
             $table->string('fullName');
             $table->string('emailAddress')->unique();
-            $table->string('phoneNumber');
-            $table->string('age');
-            $table->string('gender');
-            $table->string('username');
+            $table->string('phoneNumber', 50);
+            $table->string('age', 50);
+            $table->string('gender', 50);
+            $table->string('username', 100);
             $table->string('password');
             $table->timestamp('dateRegistered_at')->useCurrent();
-            $table->string('treatmentStatus');
-            $table->string('assignedDoctorID');
+            $table->char('treatmentStatus', 4);
+            $table->unsignedInteger('assignedDoctorID');
         });
     }
 

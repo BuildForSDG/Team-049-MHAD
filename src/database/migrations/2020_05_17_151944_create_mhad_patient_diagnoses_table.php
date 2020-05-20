@@ -15,9 +15,9 @@ class CreateMhadPatientDiagnosesTable extends Migration
     {
         Schema::create('mhad_patient_diagnoses', function (Blueprint $table) {
             $table->id();
-            $table->string('pregNo')->index();
+            $table->string('pregNo', 100)->index();
             $table->string('phqResult');
-            $table->string('diagnosisLevel');
+            $table->string('diagnosisLevel', 100);
             $table->timestamp('dateDaignosed')->useCurrent();
         });
     }

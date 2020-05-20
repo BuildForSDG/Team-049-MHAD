@@ -15,13 +15,13 @@ class CreateMhadPatientTreatmentsTable extends Migration
     {
         Schema::create('mhad_patient_treatments', function (Blueprint $table) {
             $table->id();
-            $table->string('pregNo')->index();
+            $table->string('pregNo', 100)->index();
             $table->mediumText('targetSymptom');
             $table->longText('prescDesc');
             $table->timestamp('dateTreated')->useCurrent();
             $table->longText('comment');
             $table->longText('patientFeedback');
-            $table->string('status');
+            $table->char('status', 4);
         });
     }
 
