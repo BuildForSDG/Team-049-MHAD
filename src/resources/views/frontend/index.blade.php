@@ -9,7 +9,7 @@
                     </figure>
                     <h2>MHAD - PHQ-9 <span>Patient Health Questionnaire-9</span></h2>
                     <p>Help yourself in decision-making whether to seek professional medical advice or not.</p>
-                    <a href="#" class="btn_1 rounded yellow">Login</a>
+                    <a href="{{config('app.url')}}/patientSignIn" class="btn_1 rounded yellow">Patient Login</a>
                     <a href="#wizard_container" class="btn_1 rounded mobile_btn yellow">Start Now!</a>
                     <a href="#0" id="more_info" data-toggle="modal" data-target="#more-info"><i class="pe-7s-info"></i></a>
                 </div>
@@ -19,9 +19,10 @@
                     <div id="top-wizard">
                         <div id="progressbar"></div>
                         <span id="location"></span>
-                    </div>
+                    </div> 
                     <!-- /top-wizard -->
-                    <form id="wrapped" method="post">
+                    <!--form id="wrapped" method="post"-->
+                    {!! Form::open(['url' => 'foo/bar', 'method'=>'POST', 'id' => 'wrapped']) !!}
                         <input id="website" name="website" type="text" value="">
                         <h3>Objectifies degree of depression severity</h3>
                         <small><b>MHAD Advice</b><br>Final diagnosis should be made with clinical interview and mental status examination including assessment of patient’s level of distress and functional impairment by medical professional.</small>
@@ -347,7 +348,8 @@
                             <button type="submit" name="process" class="submit">Submit</button>
                         </div>
                         <!-- /bottom-wizard -->
-                    </form>
+                    {!! Form::close() !!}
+                    <!--/form -->
                 </div>
                 <!-- /Wizard container -->
             </div>

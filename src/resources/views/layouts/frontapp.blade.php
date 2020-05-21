@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="BuildForSDG - Medical Health Assisted Diagnosis">
-    <title>.:: MHAD - Medical Health Assisted Diagnosos ::.</title>
+    <meta name="description" content="BuildForSDG - Mental Health Assisted Diagnosis">
+    <title>.:: MHAD - Mental Health Assisted Diagnosis ::.</title>
     <!-- Favicons-->
     <link rel="shortcut icon" href="frontend/img/favicon.ico" type="image/x-icon">
     <!-- GOOGLE WEB FONT -->
@@ -28,12 +28,13 @@
         @yield('content')
     </div>
     <!-- /container -->
-    <div class="container">
+    <div class="container"> 
         <footer id="home" class="clearfix">
             <p>© <?=@date('Y');?> BuildForSDG Team-049 MHAD</p>
             <ul>
-                <li><a href="#" class="animated_link">Admin Login</a></li>
-                <li><a href="#" class="animated_link">Doctor Login</a></li>
+                <li><a href="{{config('app.url')}}/adminSignIn" class="animated_link">Admin Login</a></li>
+                <li><a href="{{config('app.url')}}/doctorSignIn" class="animated_link">Doctor Login</a></li>
+                <li><a href="{{config('app.url')}}/specialist" class="animated_link">Doctor SignUp</a></li>
             </ul>
         </footer>
         <!-- end footer-->
@@ -59,9 +60,7 @@
 				<div class="modal-body">
                     <p><h5>Facts & Figures</h5></p> 
                     <p>PHQ-9 is a validated, 9-question tool to assess for the degree of depression present in an individual; the last question is not scored, but is useful functionally to help the clinician assess the impact of the patient's symptoms on his or her life. <br>- <small><i>MDCALC</i></small></p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-				</div>
+                </div>
 				<div class="modal-footer">
 					<button type="button" class="btn_1" data-dismiss="modal">Close</button>
 				</div>

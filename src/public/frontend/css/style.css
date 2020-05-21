@@ -466,6 +466,21 @@ input#website {
     }
 }
 
+#wizard_container2 {
+    padding: 60px;
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+    background: url(../img/pattern_1.png) repeat;
+    position: relative
+}
+
+@media (max-width: 767px) {
+    #wizard_container2 {
+        padding: 30px
+    }
+}
+
 #middle-wizard {
     width: 500px;
     min-height: 420px;

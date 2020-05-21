@@ -1,29 +1,29 @@
-(function (obj) {
+(function(obj) {
     'use strict';
-    obj(window)['on']('load', function () {
+    obj(window)['on']('load', function() {
         obj('[data-loader="circle-side"]')['fadeOut']();
         obj('#preloader')['delay'](350)['fadeOut']('slow');
         obj('body')['delay'](350)['css']({
             'overflow': 'visible'
         })
     });
-    obj('form#wrapped')['on']('submit', function () {
+    obj('form#wrapped')['on']('submit', function() {
         var formwrapper = obj('form#wrapped');
         formwrapper['validate']();
         if (formwrapper['valid']()) {
             obj('#loader_form')['fadeIn']()
         }
     });
-    obj('.container_radio.version_2 input[type="radio"], .container_check.version_2 input[type="checkbox"]')['click'](function () {
+    obj('.container_radio.version_2 input[type="radio"], .container_check.version_2 input[type="checkbox"]')['click'](function() {
         obj(this)['parent']()['addClass']('active')['siblings']('label')['removeClass']('active')
     });
-    obj('a[href^="#"].mobile_btn')['on']('click', function (formaction) {
+    obj('a[href^="#"].mobile_btn')['on']('click', function(formaction) {
         formaction['preventDefault']();
         var objVal = this['hash'];
         var objVal2 = obj(objVal);
         obj('html, body')['stop']()['animate']({
             'scrollTop': objVal2['offset']()['top']
-        }, 400, 'swing', function () {
+        }, 400, 'swing', function() {
             window['location']['hash'] = objVal
         })
     });
@@ -39,7 +39,7 @@
     function _0xfb19x8(formaction) {
         obj(formaction['target'])['prev']('.panel-heading')['find']('.indicator')['toggleClass']('ti-minus ti-plus')
     }
-    obj('#faq_box a[href^="#"]')['on']('click', function () {
+    obj('#faq_box a[href^="#"]')['on']('click', function() {
         if (location['pathname']['replace'](/^\//, '') == this['pathname']['replace'](/^\//, '') || location['hostname'] == this['hostname']) {
             var objVal = obj(this['hash']);
             objVal = objVal['length'] ? objVal : obj('[name=' + this['hash']['slice'](1) + ']');
@@ -51,7 +51,7 @@
             }
         }
     });
-    obj('ul#cat_nav li a')['on']('click', function () {
+    obj('ul#cat_nav li a')['on']('click', function() {
         obj('ul#cat_nav li a.active')['removeClass']('active');
         obj(this)['addClass']('active')
     });
@@ -60,17 +60,17 @@
         objPryNav = obj('.cd-primary-nav'),
         objnavTrigger = obj('.cd-nav-trigger');
     animateFrameSet();
-    obj(window)['on']('resize', function () {
+    obj(window)['on']('resize', function() {
         window['requestAnimationFrame'](animateFrameSet)
     });
-    objnavTrigger['on']('click', function () {
+    objnavTrigger['on']('click', function() {
         if (!objnavTrigger['hasClass']('close-nav')) {
             objnavTrigger['addClass']('close-nav');
             objNav['children']('span')['velocity']({
                 translateZ: 0,
                 scaleX: 1,
                 scaleY: 1
-            }, 500, 'easeInCubic', function () {
+            }, 500, 'easeInCubic', function() {
                 objPryNav['addClass']('fade-in')
             })
         } else {
@@ -79,19 +79,19 @@
                 translateZ: 0,
                 scaleX: 1,
                 scaleY: 1
-            }, 500, 'easeInCubic', function () {
+            }, 500, 'easeInCubic', function() {
                 objPryNav['removeClass']('fade-in');
                 objNav['children']('span')['velocity']({
                     translateZ: 0,
                     scaleX: 0,
                     scaleY: 0
                 }, 0);
-                objCont['addClass']('is-hidden')['one']('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+                objCont['addClass']('is-hidden')['one']('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
                     objCont['children']('span')['velocity']({
                         translateZ: 0,
                         scaleX: 0,
                         scaleY: 0
-                    }, 0, function () {
+                    }, 0, function() {
                         objCont['removeClass']('is-hidden')
                     })
                 });
@@ -100,7 +100,7 @@
                         translateZ: 0,
                         scaleX: 0,
                         scaleY: 0
-                    }, 0, function () {
+                    }, 0, function() {
                         objCont['removeClass']('is-hidden')
                     })
                 }

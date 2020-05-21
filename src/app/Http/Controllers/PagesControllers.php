@@ -10,4 +10,20 @@ class PagesControllers extends Controller
         //load app front page
         return view('frontend.index');
     }
+    public function adminSignIn(){
+        //load app front page
+        return view('frontend.adminSignIn');
+    }
+    public function doctorRegister(){
+        //load app front page
+        return view('frontend.doctorRegister');
+    }
+    public function doctorSignIn(){
+        //load app front page
+        return view('frontend.doctorSignIn');
+    }
+    public function patientSignIn(){
+        //load app front page
+        return view('frontend.patientSignIn');
+    }
 }

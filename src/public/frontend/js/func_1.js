@@ -1,14 +1,11 @@
-jQuery(function (objv) {
+jQuery(function(objv) {
     'use strict';
-    objv('form#wrapped')['attr']('action', 'send_email_1.php');
+    //objv('form#wrapped')['attr']('action', 'send_email_1.php');
     objv('#wizard_container')['wizard']({
         stepsWrapper: '#wrapped',
         submit: '.submit',
         unidirectional: false,
-        beforeSelect: function (objSet, objsVal) {
-            if (objv('input#website')['val']()['length'] != 0) {
-                return false
-            };
+        beforeSelect: function(objSet, objsVal) {
             if (!objsVal['isMovingForward']) {
                 return true
             };
@@ -16,7 +13,7 @@ jQuery(function (objv) {
             return !wzVal['length'] || !!wzVal['valid']()
         }
     })['validate']({
-        errorPlacement: function (objCHK, objCHK_Val) {
+        errorPlacement: function(objCHK, objCHK_Val) {
             if (objCHK_Val['is'](':radio') || objCHK_Val['is'](':checkbox')) {
                 objCHK['insertBefore'](objCHK_Val['next']())
             } else {
@@ -26,7 +23,7 @@ jQuery(function (objv) {
     });
     objv('#progressbar')['progressbar']();
     objv('#wizard_container')['wizard']({
-        afterSelect: function (objSet, objsVal) {
+        afterSelect: function(objSet, objsVal) {
             objv('#progressbar')['progressbar']('value', objsVal['percentComplete']);
             objv('#location')['text']('' + objsVal['stepsComplete'] + ' of ' + objsVal['stepsPossible'] + ' completed')
         }
@@ -34,7 +31,7 @@ jQuery(function (objv) {
 });
 $('#wizard_container')['wizard']({
     transitions: {
-        branchtype: function (obj, optn) {
+        branchtype: function(obj, optn) {
             var objval = obj['find'](':checked')['val']();
             if (!objval) {
                 $('form')['valid']()
@@ -46,13 +43,13 @@ $('#wizard_container')['wizard']({
 
 function getVals(field, fieldVal) {
     switch (fieldVal) {
-    case 'name_field':
-        var getVal = $(field)['val']();
-        $('#name_field')['text'](getVal);
-        break;
-    case 'email_field':
-        var getVal = $(field)['val']();
-        $('#email_field')['text'](getVal);
-        break
+        case 'name_field':
+            var getVal = $(field)['val']();
+            $('#name_field')['text'](getVal);
+            break;
+        case 'email_field':
+            var getVal = $(field)['val']();
+            $('#email_field')['text'](getVal);
+            break
     }
 }
