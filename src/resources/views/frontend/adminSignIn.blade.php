@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-4">
                                     <div class="form-group">
-                                        <input type="submit" name="SignIn" value="Submit" class="btn btn-primary"/>
+                                        <input type="submit" name="SignIn" value="SignIn" class="btn_1"/>
                                     </div>
                                 </div>
                             </div>
