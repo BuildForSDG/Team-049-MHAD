@@ -15,9 +15,7 @@
 	<link href="frontend/css/menu.css" rel="stylesheet">
     <link href="frontend/css/style.css" rel="stylesheet">
 	<link href="frontend/css/vendors.css" rel="stylesheet">
-    <!-- YOUR CUSTOM CSS -->
-    <link href="frontend/css/custom.css" rel="stylesheet">
-	<!-- MODERNIZR MENU -->
+	<!-- MODERNIZR MENU --> 
 	<script src="frontend/js/modernizr.js"></script>
 </head>
 <body>	
