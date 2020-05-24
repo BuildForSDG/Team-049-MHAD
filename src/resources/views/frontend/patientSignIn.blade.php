@@ -23,11 +23,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="emailAddress">Email Address</label>
-                                <input type="email" name="emailAddress" id="emailAddress" class="form-control required" onchange="getVals(this, 'email_field');">
+                                <input type="email" name="emailAddress" id="emailAddress" required class="form-control required" onchange="getVals(this, 'email_field');">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="form-control required" onchange="getVals(this, 'email_field');">
+                                <input type="password" name="password" id="password" required class="form-control required" onchange="getVals(this, 'email_field');">
                             </div>
                             <div class="form-group">
                                     &nbsp;<p>&nbsp;</p>

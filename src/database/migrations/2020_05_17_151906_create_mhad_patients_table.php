@@ -23,6 +23,9 @@ class CreateMhadPatientsTable extends Migration
             $table->string('gender', 50);
             $table->string('username', 100);
             $table->string('password');
+            $table->char('require_treatment', 4);
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
             $table->timestamp('dateRegistered_at')->useCurrent();
             $table->char('treatmentStatus', 4);
             $table->unsignedInteger('assignedDoctorID');

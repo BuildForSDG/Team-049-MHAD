@@ -18,6 +18,9 @@ class CreateMhadPatientDiagnosesTable extends Migration
             $table->string('pregNo', 100)->index();
             $table->string('phqResult');
             $table->string('diagnosisLevel', 100);
+            $table->text('diagnoseSuggest');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
             $table->timestamp('dateDaignosed')->useCurrent();
         });
     }

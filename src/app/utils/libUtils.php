@@ -207,7 +207,7 @@ class libUtils {
         return strtr($string, $trans_tbl);
     }    
         
-    public function sendEmail($to,$mssg,$subjt)
+    public static function sendEmail($to,$mssg,$subjt)
     {
         $message = $mssg;
         /* To send HTML mail, you can set the Content-type header. */

@@ -22,8 +22,7 @@
                     </div> 
                     <!-- /top-wizard -->
                     <!--form id="wrapped" method="post"-->
-                    {!! Form::open(['url' => 'foo/bar', 'method'=>'POST', 'id' => 'wrapped']) !!}
-                        <input id="website" name="website" type="text" value="">
+                    {!! Form::open(['url' => '/phq9', 'method'=>'POST', 'id' => 'wrapped']) !!}
                         <h3>Objectifies degree of depression severity</h3>
                         <small><b>MHAD Advice</b><br>Final diagnosis should be made with clinical interview and mental status examination including assessment of patient’s level of distress and functional impairment by medical professional.</small>
                         <hr>
