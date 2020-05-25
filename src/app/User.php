@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function profile(){
         return $this->hasOne(Profile::class);
     }
-    
+    /8*
     public function specialist(){ 
         return $this->hasOne(Specialist::class);
     }

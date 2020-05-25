@@ -15,41 +15,48 @@
             </div>
             <div class="col-lg-8">
                 <div id="wizard_container2">
-                    {!! Form::open(['url' => 'foo/bar', 'method'=>'POST']) !!}
+                    {!! Form::open(['url' => '/specialist', 'method'=>'POST']) !!}
                         <h3>Specialist Register</h3>
                         <div class="step">
                             <h3 class="main_question"><i class="arrow_right"></i>Please fill with your personal data</h3>
                             <div class="form-group add_top_30">
                                 <label for="fullName">First and Last Name</label>
-                                <input type="text" name="fullName" id="fullName" class="form-control required" onchange="getVals(this, 'name_field');">
+                                <input type="text" name="fullName" id="fullName" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="emailAddress">Email Address</label>
-                                <input type="email" name="emailAddress" id="emailAddress" class="form-control required" onchange="getVals(this, 'email_field');">
+                                <input type="email" name="emailAddress" id="emailAddress" class="form-control" required>
                             </div>
                             <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control required" onchange="getVals(this, 'email_field');">
+                                    <input type="password" name="password" id="password" class="form-control" required>
                                 </div>
                             <div class="form-group">
                                 <label for="phoneNumber">Phone</label>
-                                <input type="text" name="phoneNumber" id="phoneNumber" class="form-control required">
+                                <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="occupation">Occupation</label>
-                                <input type="text" name="occupation" id="occupation" class="form-control required">
+                                <input type="text" name="occupation" id="occupation" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="specialty">Specialty</label>
-                                <select name="specialty" class="form-control required">
+                                <select name="specialty" class="form-control" required>
                                     <option></option>
+                                    <option value="Critical Care">Critical Care</option>
+                                    <option value="Family Practice">Family Practice</option>
+                                    <option value="Neurology">Neurology</option>
+                                    <option value="Orthopedics">Orthopedics</option>
+                                    <option value="Pathology">Pathology</option>
+                                    <option value="Pharmacy">Pharmacy</option>
+                                    <option value="Psychiatry">Psychiatry</option>
                                 </select>
                             </div>
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-4">
                                     <label for="age">Age</label>
                                     <div class="form-group radio_input">
-                                        <input type="text" name="age" id="age" class="form-control required">
+                                        <input type="text" name="age" id="age" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-6 col-8">

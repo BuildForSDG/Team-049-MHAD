@@ -26,7 +26,7 @@ Route::get('/patientSignIn', 'PagesControllers@patientSignIn');
 
 Route::get('/doctorSignIn', 'PagesControllers@doctorSignIn'); 
 Route::get('/specialist', 'PagesControllers@doctorRegister'); 
-
+Route::POST('/specialist', 'SpecialistRegisterController@specialistRegister');
 Route::POST('/phq9', 'PatientsPHQControllers@store'); 
 
 

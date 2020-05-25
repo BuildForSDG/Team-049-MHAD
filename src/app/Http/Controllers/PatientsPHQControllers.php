@@ -47,24 +47,6 @@ class PatientsPHQControllers extends Controller
             'terms'=>'required'
 
         ]);
-        //var_dump($request->input());
-        /**
-         *  ["question_1"]=> string(1) "2" 
-         * ["question_2"]=> string(1) "3" 
-         * ["question_3"]=> string(1) "2" 
-         * ["question_4"]=> string(1) "2" 
-         * ["question_5"]=> string(1) "0" 
-         * ["question_6"]=> string(1) "3" 
-         * ["question_7"]=> string(1) "3" 
-         * ["question_8"]=> string(1) "3" 
-         * ["question_9"]=> string(1) "3" 
-         * ["name"]=> string(23) "Emmanuel John Oluwasina" 
-         * ["email"]=> string(21) "chinoskeshi@yahoo.com" 
-         * ["phone"]=> string(13) "1234567890112" 
-         * ["age"]=> string(2) "23" 
-         * ["gender"]=> string(4) "Male" 
-         * ["terms"]=> string(3) "Yes"
-         */
         $phqScore = $request->question_1 + 
                     $request->question_2 + 
                     $request->question_3 + 
