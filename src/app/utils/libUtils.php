@@ -22,70 +22,33 @@ class libUtils {
         $this->view = '';
     }
     
+    public static function checkSession(Request $request)    
+    {
+        //var_dump($request->session());
+        if($request->session()->has('userType')) {
+            return true;
+        } else {
+            header("Location: ./");
+        }
+        exit();
+    }
+
+    public static function checklogin(Request $request)    
+    {
+        //var_dump($request->session());
+        if($request->session()->has('userType')) {
+            header("Location: ./Admin");
+        } else {
+            return true;
+        }
+        exit();
+    }
     // -------------------------------------------------------------
     public function spacer()
     {
         $spacer = '<div class="clr"></div>';
         return $spacer;
-    }
-    
-    public static function messageBox($message,$catG)
-    {
-        if($catG == '2') {
-            $mID = 'alert-success"><span class="vd_alert-icon"><i class="fa fa-check-circle vd_green"></i></i></span>&nbsp;<strong>Success!&nbsp;</strong>';
-        } elseif($catG == '0') {
-            $mID = 'alert-danger"><span class="vd_alert-icon"><i class="fa fa-exclamation-circle vd_red"></i></span>&nbsp;<strong>Error!&nbsp;</strong>';
-        } elseif($catG == '1') {
-            $mID = 'alert-warning"> <span class="vd_alert-icon"><i class="fa fa-exclamation-triangle vd_yellow"></i></span>&nbsp;<strong>Warning!&nbsp;</strong>';
-        } elseif($catG == '3') {
-            $mID = 'alert-warning"> <span class="vd_alert-icon"><i class="fa fa-exclamation-triangle vd_yellow"></i></span>&nbsp;<strong>Notice!&nbsp;</strong>';
-        } else {
-            $mID = '">';
-        }        
-        $message = '<div class="alert '.$mID.''.$message.'</div>';
-        return $message;
-    }
-    // -------------------------------------------------------------------
-    public static function Message($data)
-    {
-        $mID = 'message';
-        $mTTLE = 'Message &raquo; &nbsp;';
-        $message = '
-            <div class="alert alert-success"><span class="vd_alert-icon"><i class="fa fa-check-circle vd_green"></i></i></span>&nbsp;<strong>Success!&nbsp;</strong> '.$data.'</div>';
-        return $message;
-    }
-    
-    // --------------------------------------------------------------------
-    
-    public function noticeMssg($data)
-    {
-        $mID = 'notice';
-        $mTTLE = 'Notice &raquo; &nbsp;';
-        $message = '
-            <dl id="system-message">
-                <dt class="message"></dt>
-                    <dd class="message '.$mID.'">
-                        <b>'.$mTTLE.'</b>  '.$data.'
-                    </dd>
-            </dl>';
-        return $message;
-    }
-    
-    // ---------------------------------------------------------------------
-    public function errorMssg($data)
-    {
-        $mID = 'error';
-        $mTTLE = 'Error!!! &raquo; ';
-        
-        $message = '
-            <dl id="system-message">
-                <dt class="message"></dt>
-                    <dd class="message '.$mID.'">
-                        <b>'.$mTTLE.'</b>  '.$data.'
-                    </dd>
-            </dl>';
-        return $message;
-    }
+    }        
    
     public function logout()
     {
@@ -245,30 +208,7 @@ class libUtils {
                 return $days;
             break;
         }
-    }
-    
-    public function asteriks()
-    {
-        return "<span class='asteriks' style='color:red'>* </span>";    
-    }
-    public function naira()
-    {
-        return '(<span class="naira">N</span>)';    
-    }
-    
-    public function formTable()
-    {
-        return $this->tabClassDsip.'width="100%" border="0" cellspacing="3" cellpadding="3"';
-    }
-    
-    public function excapeCurrency($value) 
-    {
-        return str_replace(',', '', $value);    
-    }
-    public function currecyFormat($value) 
-    {
-        return number_format($value, 2);    
-    }
+    }    
     
     public function getYearDifference($date1, $date2) 
     {
@@ -280,14 +220,7 @@ class libUtils {
         }
         return $year;
     }
-    
-    public function getExcelAlpha() 
-    {
-        $alpAray = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ','BA','BB','BC','BD','BE','BF','BG','BH','BI','BJ','BK','BL','BM','BN','BO','BP','BQ','BR','BS','BT','BU','BV','BW','BX','BY','BZ','CA','CB','CC','CD','CE','CF','CG','CH','CI','CJ','CK','CL','CM','CN','CO','CP','CQ','CR','CS','CT','CU','CV','CW','CX','CY','CZ');  
-        return $alpAray;
-    }
-    
-    
+        
     public function clean_text($text) 
     {
         return $this->RemoveBS(html_entity_decode(preg_replace('/%u([a-fA-F0-9]{4})/', '&#x\\1;', $text), ENT_QUOTES));

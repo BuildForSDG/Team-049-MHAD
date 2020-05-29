@@ -91,13 +91,13 @@ body.fixed-nav {
 
 #mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level,
 #mainNav .navbar-collapse .navbar-sidenav .sidenav-third-level {
-    padding-left: 0
+    padding-left: 0;
 }
 
 #mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level>li>a,
 #mainNav .navbar-collapse .navbar-sidenav .sidenav-third-level>li>a {
     display: block;
-    padding: .5em 0
+    padding: .5em 0;
 }
 
 #mainNav .navbar-collapse .sidenav-toggler,

@@ -25,30 +25,42 @@ Route::get('/adminSignIn', 'PagesControllers@adminSignIn');
 Route::get('/patientSignIn', 'PagesControllers@patientSignIn'); 
 
 Route::get('/doctorSignIn', 'PagesControllers@doctorSignIn'); 
+Route::POST('/doctorSignIn', 'SpecialistController@specialistSign');
+Route::get('/doctorReset', 'SpecialistController@ResetRequest');
+Route::POST('/doctorReset', 'SpecialistController@specialistReset');
+
 Route::get('/specialist', 'PagesControllers@doctorRegister'); 
-Route::POST('/specialist', 'SpecialistRegisterController@specialistRegister');
+Route::POST('/specialist', 'SpecialistController@specialistRegister');
+
 Route::POST('/phq9', 'PatientsPHQControllers@store'); 
 
+Route::get('/Admin', 'backendControllers@dashboad');
+Route::get('/logout', 'backendControllers@logout');
 
-Auth::routes();
+Route::middleware('specialist')->group(function () {
+    Route::get('/profile', 'SpecialistController@profile');
+    Route::post('/profile', 'SpecialistController@profileUpdate');
+    Route::get('/reset', 'SpecialistController@reset');
+    Route::post('/reset', 'SpecialistController@resetUpdate');
 
-Auth::routes(['verify' => true]);
+    Route::resource('/patient', 'PatientManagementControllers');
+    Route::get('/phq9', 'PatientManagementControllers@phq9Results');
+    Route::get('/patientprofile', 'PatientManagementControllers@patientProfile');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('treatment', 'PatientTreatmentControllers@index'); 
+    Route::resource('tcreate', 'PatientTreatmentControllers@create');
+    Route::resource('tsearch', 'PatientTreatmentControllers@search');
 
-//Specialist Routes
-Route::view('specialist/register', 'auth.specialist-register')->name('specialist.register');
-Route::post('specialist/register', 'SpecialistRegisterController@specialistRegister')->name('specialist.register');
-Route::get('/profile', 'SpecialistController@index')->middleware('specialist');
-Route::post('profile/avatar', 'SpecialistController@avatar')->name('avatar');
+    Route::resource('newschedule', 'PatientFollowUpControllers@create');
+    Route::resource('schedule', 'PatientFollowUpControllers');
 
-Route::post('profile/create', 'SpecialistController@store')->name('profile.store');
-Route::get('/profile/create', 'SpecialistController@create')->name('profile.view');
-
-Route::get('/profile/patients', 'SpecialistController@patients')->middleware('specialist')->name('mypatients');
-Route::get('/profile/changepassword', 'SpecialistController@changePasswordForm')->middleware('specialist')->name('changepassword');
-Route::post('/profile/changepassword', 'SpecialistController@changePassword')->middleware('specialist')->name('changepassword');
-
-
-//Patient Route
-Route::get('/dashboard', 'PatientController@index')->middleware('patient');
+    Route::resource('complaintrecord', 'PatientComplaintControllers');
+    Route::resource('complaintsearch', 'PatientComplaintControllers@search');
+    Route::resource('complaint', 'PatientComplaintControllers');
+});
+Route::middleware('patient')->group(function () {
+    Route::get('/myprofile', 'PatientControllerControllers@profile');
+});
+Route::middleware('admin')->group(function () {
+  
+}); 

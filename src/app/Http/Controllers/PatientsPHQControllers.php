@@ -15,8 +15,10 @@ class PatientsPHQControllers extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //load app front page
+        libUtils::checklogin($request);
         return view('frontend.index');
     }
 

@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
-class Specialist
+
+class SessionHasSpecialist
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,9 @@ class Specialist
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()&&Auth::user()->user_type=='specialist'){
+        if(session('userType')[0] == 'Specialist') {
             return $next($request);
         }
-        return redirect('login');
+        return abort(404);
     }
 }
-
-
