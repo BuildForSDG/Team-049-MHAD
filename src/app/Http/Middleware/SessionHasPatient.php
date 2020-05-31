@@ -15,9 +15,14 @@ class SessionHasPatient
      */
     public function handle($request, Closure $next)
     {
-        if(session('userType')[0] == 'Patient') {
-            return $next($request);
+        try {
+            if(session('userType')[0] == 'Patient') {
+                return $next($request);
+            }
+            return abort(404);
+        } catch (\Exception $e) {
+            header("Location: ./patientSignIn");
+            exit();
         }
-        return abort(404);
     }
 }

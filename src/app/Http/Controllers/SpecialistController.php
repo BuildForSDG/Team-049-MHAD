@@ -50,20 +50,24 @@ class SpecialistController extends Controller
         ]);
         $email = $request->emailAddress;
         $result = DB::select('SELECT `password`, `docRegNo`, `fullName`, `emailAddress`, `occupation`, `specialty`, `gender`, `phoneNumber` FROM `mhad_specialists` WHERE `emailAddress` = "'.$email.'" AND `status` = "1"', []);
-        $hashedPassword = $result[0]->password;
-        if (Hash::check($request->password, $hashedPassword)) {
-            //$seRquest = new Request;
-            $request->session()->flush();
-            $request->session()->push('docRegNo', $result[0]->docRegNo);
-            $request->session()->push('userType', 'Specialist');
-            $request->session()->push('userDesc', 'Medical Specialist');
-            $request->session()->push('fullName', $result[0]->fullName);
-            $request->session()->push('emailAddress', $result[0]->emailAddress);
-            $request->session()->push('phoneNumber', $result[0]->phoneNumber);
-            $request->session()->push('specialty', $result[0]->specialty);
-            $request->session()->push('occupation', $result[0]->occupation);
-            //return view('backend.index')->with('data', $result[0]);
-            return redirect('/Admin');
+        if(count($result) > 0) {
+            $hashedPassword = $result[0]->password;
+            if (Hash::check($request->password, $hashedPassword)) {
+                //$seRquest = new Request;
+                $request->session()->flush();
+                $request->session()->push('docRegNo', $result[0]->docRegNo);
+                $request->session()->push('userType', 'Specialist');
+                $request->session()->push('userDesc', 'Medical Specialist');
+                $request->session()->push('fullName', $result[0]->fullName);
+                $request->session()->push('emailAddress', $result[0]->emailAddress);
+                $request->session()->push('phoneNumber', $result[0]->phoneNumber);
+                $request->session()->push('specialty', $result[0]->specialty);
+                $request->session()->push('occupation', $result[0]->occupation);
+                //return view('backend.index')->with('data', $result[0]);
+                return redirect('/Admin');
+            } else {
+                return back()->with('error', 'Error!!! Invalid email address or password');
+            }
         } else {
             return back()->with('error', 'Error!!! Invalid email address or password');
         }

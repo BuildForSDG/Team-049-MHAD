@@ -15,9 +15,14 @@ class SessionHasAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(session('userType')[0] == 'Admin') {
-            return $next($request);
+        try {
+            if(session('userType')[0] == 'adminSignIn') {
+                return $next($request);
+            }
+            return abort(404);
+        } catch (\Exception $e) {
+            header("Location: ./patientSignIn");
+            exit();
         }
-        return abort(404);
     }
 }

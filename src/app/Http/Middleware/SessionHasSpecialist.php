@@ -15,9 +15,14 @@ class SessionHasSpecialist
      */
     public function handle($request, Closure $next)
     {
-        if(session('userType')[0] == 'Specialist') {
-            return $next($request);
+        try {
+            if(session('userType')[0] == 'Specialist') {
+                return $next($request);
+            }
+            return abort(404);
+        } catch (\Exception $e) {
+            header("Location: ./doctorSignIn");
+            exit();
         }
-        return abort(404);
     }
 }
