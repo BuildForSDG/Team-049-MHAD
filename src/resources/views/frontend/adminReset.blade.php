@@ -7,36 +7,32 @@
                     <figure>
                         <img src="frontend/img/info_graphic_1.png" alt="" width="140" height="100">
                     </figure>
-                    <h2>MHAD <br><br><span>Patient SignIn</span></h2>
+                    <h2>MHAD <span>Admin Reset Password</span></h2>
                     <a href="{{config('app.url')}}/" class="btn_1 rounded yellow">Home</a>
                     <a href="#0" id="more_info" data-toggle="modal" data-target="#more-info"><i class="pe-7s-info"></i></a>
                 </div>
             </div>
             <div class="col-lg-8">
                 <div id="wizard_container2">
-                    {!! Form::open(['url' => '/patientSignIn', 'method'=>'POST']) !!}
-                        <h3>Patient SignIn</h3>
+                    {!! Form::open(['url' => '/adminReset', 'method'=>'POST']) !!}
+                        <h3>Admin Password Reset</h3>
                         <div class="step">
-                            <h3 class="main_question"><i class="arrow_right"></i>Please SignIn to your account</h3>
+                            <h3 class="main_question"><i class="arrow_right"></i>To reset your password, please provide your email address</h3>
                             <div class="form-group">
                                 <p>&nbsp;</p>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group"> 
                                 <label for="emailAddress">Email Address</label>
-                                <input type="email" name="emailAddress" id="emailAddress" required class="form-control required" onchange="getVals(this, 'email_field');">
+                                <input type="email" name="emailAddress" id="emailAddress" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" id="password" required class="form-control required" onchange="getVals(this, 'email_field');">
+                                <a href="{{config('app.url')}}/adminSignIn">SignIn</a>
+                                    &nbsp;<p>&nbsp;</p>
                             </div>
-                            <div class="form-group">
-                                    <a href="{{config('app.url')}}/patientReset">Reset Password</a>
-                                        &nbsp;<p>&nbsp;</p>
-                                </div>
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-4">
                                     <div class="form-group">
-                                        <input type="submit" name="SignIn" value="SignIn" class="btn_1"/>
+                                        <input type="submit" name="Reset" value="Reset" class="btn_1"/>
                                     </div>
                                 </div>
                             </div>

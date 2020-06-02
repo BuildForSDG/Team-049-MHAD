@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-8">
                 <div id="wizard_container2">
-                    {!! Form::open(['url' => 'foo/bar', 'method'=>'POST']) !!}
+                    {!! Form::open(['url' => '/adminSignIn', 'method'=>'POST']) !!}
                         <h3>Admin SignIn</h3>
                         <div class="step">
                             <h3 class="main_question"><i class="arrow_right"></i>MHAD - Admin SignIn</h3>
@@ -30,8 +30,9 @@
                                 <input type="password" name="password" id="password" class="form-control required" onchange="getVals(this, 'email_field');">
                             </div>
                             <div class="form-group">
-                                    &nbsp;<p>&nbsp;</p>
-                            </div>
+                                    <a href="{{config('app.url')}}/adminReset">Reset Password</a>
+                                        &nbsp;<p>&nbsp;</p>
+                                </div>
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-4">
                                     <div class="form-group">

@@ -15,7 +15,7 @@
             <div class="col-lg-8">
                 <div id="wizard_container2">
                     {!! Form::open(['url' => '/doctorReset', 'method'=>'POST']) !!}
-                        <h3>Specialist SignIn</h3>
+                        <h3>Specialist Password Reset</h3>
                         <div class="step">
                             <h3 class="main_question"><i class="arrow_right"></i>To reset your password, please provide your email address</h3>
                             <div class="form-group">

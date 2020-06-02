@@ -95,7 +95,7 @@
                                 <i class="fa fa-fw fa-heart"></i>
                             </div>
                             <div class="mr-5">
-                                <h5>26 - Total Patient Assigned</h5>
+                                <h5>1 - PHQ-9 Test</h5>
                             </div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="messages.html">
@@ -113,7 +113,7 @@
                                 <i class="fa fa-fw fa-heart"></i>
                             </div>
                             <div class="mr-5">
-                                <h5>11 - Total Patient Treated</h5>
+                                <h5>0 - Total Treatment</h5>
                             </div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="reviews.html">
@@ -165,7 +165,7 @@
             <h2></h2>
             <div class="box_general padding_bottom">
                 <div class="header_box version_2">
-                    <h2><i class="fa fa-bar-chart"></i>Patient Monthly Statistic</h2>
+                    <h2><i class="fa fa-bar-chart"></i>Monthly Schedule</h2>
                 </div>
                 <canvas id="myAreaChart" width="100%" height="30" style="margin:45px 0 15px 0;"></canvas>
             </div>
@@ -179,7 +179,7 @@
                                 <i class="fa fa-fw fa-heart"></i>
                             </div>
                             <div class="mr-5">
-                                <h5>26 - Total Patient Assigned</h5>
+                                <h5>26 - Total Patient</h5>
                             </div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="messages.html">
@@ -197,7 +197,7 @@
                                 <i class="fa fa-fw fa-heart"></i>
                             </div>
                             <div class="mr-5">
-                                <h5>11 - Total Patient Treated</h5>
+                                <h5>11 - Total PHQ-9 Test</h5>
                             </div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="reviews.html">
@@ -212,10 +212,10 @@
                     <div class="card dashboard text-white bg-success o-hidden h-100">
                         <div class="card-body">
                             <div class="card-body-icon">
-                                <i class="fa fa-fw fa-calendar-check-o"></i>
+                                <i class="fa fa-fw fa-user-o"></i>
                             </div>
                             <div class="mr-5">
-                                <h5>10 - Total schedule</h5>
+                                <h5>10 - Total Specialist</h5>
                             </div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="bookings.html">

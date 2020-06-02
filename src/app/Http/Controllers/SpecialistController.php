@@ -88,17 +88,21 @@ class SpecialistController extends Controller
             $newPwd = @date('yhmis');
             $pwd = bcrypt($newPwd);
             $dataT = array('pwd'=>$newPwd, 'name' => $data[0]->fullName, 'email'=>$email);
-            Mail::send('html.SPreset', $dataT, function ($message) use ($dataT) {
-                $message->from('inf@buildforsdg.com', 'MHAD');
-                $message->sender('inf@buildforsdg.com', 'MHAD');
-                $message->to($dataT['email'], $dataT['name']);
-                $message->cc('inf@buildforsdg.com', 'MHAD');
-                $message->bcc('inf@buildforsdg.com', 'MHAD');
-                $message->replyTo('inf@buildforsdg.com', 'MHAD');
-                $message->subject('Password Reset');
-                $message->priority(3);
-            });
-            DB::update('update mhad_specialists set password = '.$pwd.' where emailAddress = ?', [$request->emailAddress]);
+            try{
+                Mail::send('html.SPreset', $dataT, function ($message) use ($dataT) {
+                    $message->from('inf@buildforsdg.com', 'MHAD');
+                    $message->sender('inf@buildforsdg.com', 'MHAD');
+                    $message->to($dataT['email'], $dataT['name']);
+                    $message->cc('inf@buildforsdg.com', 'MHAD');
+                    $message->bcc('inf@buildforsdg.com', 'MHAD');
+                    $message->replyTo('inf@buildforsdg.com', 'MHAD');
+                    $message->subject('Password Reset');
+                    $message->priority(3);
+                });
+            } catch (\Exception $e) {
+                //return false;
+            }
+            DB::update('update mhad_specialists set password = "'.$pwd.'" where emailAddress = ?', [$request->emailAddress]);
             return back()->with('success', 'Your Password has been reset successfully. Pls check your mail box for the new password');
         }else{
             return back()->with('error', 'Error resetting your password, pls try again');

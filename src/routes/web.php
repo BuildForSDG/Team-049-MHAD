@@ -21,8 +21,14 @@ Route::get('/', function () {
 Route::get('/', 'PagesControllers@index'); 
 
 Route::get('/adminSignIn', 'PagesControllers@adminSignIn'); 
+Route::post('/adminSignIn', 'adminControllers@adminSignIn');
+Route::get('/adminReset', 'adminControllers@ResetRequest');
+Route::POST('/adminReset', 'adminControllers@adminReset');
 
 Route::get('/patientSignIn', 'PagesControllers@patientSignIn'); 
+Route::post('/patientSignIn', 'PatientController@patientSignIn');
+Route::get('/patientReset', 'PatientController@ResetRequest');
+Route::POST('/patientReset', 'PatientController@patientReset');
 
 Route::get('/doctorSignIn', 'PagesControllers@doctorSignIn'); 
 Route::POST('/doctorSignIn', 'SpecialistController@specialistSign');
@@ -59,8 +65,12 @@ Route::middleware('specialist')->group(function () {
     Route::resource('complaint', 'PatientComplaintControllers');
 });
 Route::middleware('patient')->group(function () {
-    Route::get('/myprofile', 'PatientControllerControllers@profile');
+    Route::get('/myprofile', 'PatientController@profile');
+    Route::get('/preset', 'PatientController@reset');
+    Route::post('/preset', 'PatientController@resetUpdate');
 });
 Route::middleware('admin')->group(function () {
-  
+    Route::get('/myprofile', 'PatientController@profile');
+    Route::get('/preset', 'PatientController@reset');
+    Route::post('/preset', 'PatientController@resetUpdate');
 }); 

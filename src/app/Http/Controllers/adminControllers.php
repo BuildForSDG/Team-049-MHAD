@@ -3,40 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\mhad_patient;
 use Hash;
 use Auth;
 use DB;
 use Mail;
 use App\utils\libUtils;
 
-class PatientController extends Controller
-{   
+class adminControllers extends Controller
+{
     public function profile(Request $request)
     {
         echo "Patient".session('fullName')[0];
     }
-    public function patientSignIn(Request $request)
+    public function adminSignIn(Request $request)
     {
         $this->validate($request, [
             'emailAddress' => 'required',
             'password' => 'required'
         ]);
         $email = $request->emailAddress;
-        $result = DB::select('SELECT `pregNo`, `fullName`, `emailAddress`, `phoneNumber`, `age`, `gender`, `username`, `password`, `dateRegistered_at`, `require_treatment`, `treatmentStatus`, `assignedDoctorID`, `created_at`, `updated_at` FROM `mhad_patients` WHERE  `emailAddress` = "'.$email.'" AND `require_treatment` = "1"', []);
+        $result = DB::select('SELECT `id`, `fullName`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at` FROM `mhad_admin` WHERE `email` = "'.$email.'"', []);
         if(count($result) > 0) {
             $hashedPassword = $result[0]->password;
             if (Hash::check($request->password, $hashedPassword)) {
                 //$seRquest = new Request;
                 $request->session()->flush();
-                $request->session()->push('pregNo', $result[0]->pregNo);
-                $request->session()->push('userType', 'Patient');
-                $request->session()->push('userDesc', 'MHAD Patient');
+                $request->session()->push('adminID', $result[0]->id);
+                $request->session()->push('userType', 'Admin');
+                $request->session()->push('userDesc', 'System Admin');
                 $request->session()->push('fullName', $result[0]->fullName);
-                $request->session()->push('emailAddress', $result[0]->emailAddress);
-                $request->session()->push('phoneNumber', $result[0]->phoneNumber);
-                $request->session()->push('age', $result[0]->age);
-                $request->session()->push('gender', $result[0]->gender);
+                $request->session()->push('emailAddress', $result[0]->email);
+                $request->session()->push('role', $result[0]->role);
                 //return view('backend.index')->with('data', $result[0]);
                 return redirect('/Admin');
             } else {
@@ -49,13 +46,13 @@ class PatientController extends Controller
 
     public function ResetRequest()
     {
-        return view('frontend.patientReset');
+        return view('frontend.adminReset');
     }
 
-    public function patientReset(Request $request)
+    public function adminReset(Request $request)
     {
         $this->validate($request, ['emailAddress'=>'required']);
-        $data = DB::select('SELECT `fullName`, `emailAddress` FROM `mhad_patients` WHERE `require_treatment` = 1 AND `emailAddress` = ?', [$request->emailAddress]);
+        $data = DB::select('SELECT `fullName`, `email` FROM `mhad_admin` WHERE `email` = ?', [$request->emailAddress]);
         if($data[0]->emailAddress != ''){
             $email = $data[0]->emailAddress;
             $fullName = $data[0]->fullName;
@@ -77,7 +74,7 @@ class PatientController extends Controller
                 //return false;
             }
             //echo $newPwd;
-            DB::update('update mhad_patients set password = "'.$pwd.'" where emailAddress = ?', [$request->emailAddress]);
+            DB::update('update mhad_admin set password = "'.$pwd.'" where email = ?', [$request->emailAddress]);
             return back()->with('success', 'Your Password has been reset successfully. Pls check your mail box for the new password');
         }else{
             return back()->with('error', 'Error resetting your password, pls try again');
@@ -86,7 +83,7 @@ class PatientController extends Controller
     public function reset(Request $request)
     {
         libUtils::checkSession($request);
-        return view('backend.patient.reset');
+        return view('backend.admin.reset');
     }
 
     public function resetUpdate(Request $request)
@@ -96,7 +93,7 @@ class PatientController extends Controller
             'new_password' => 'required'
         ]);
         $password = bcrypt($request->new_password);
-        $result = DB::update('update mhad_patients set `password` = "'.$password.'" where pregNo = ?', [session('pregNo')[0]]);
+        $result = DB::update('update mhad_admin set `password` = "'.$password.'" where id = ?', [session('adminID')[0]]);
         
         if($result){
             return back()->with('success', 'Password changed successfully');
