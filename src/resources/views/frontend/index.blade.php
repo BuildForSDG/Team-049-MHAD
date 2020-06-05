@@ -9,7 +9,7 @@
                     </figure>
                     <h2>MHAD - PHQ-9 <span>Patient Health Questionnaire-9</span></h2>
                     <p>Help yourself in decision-making whether to seek professional medical advice or not.</p>
-                    <a href="{{config('app.url')}}/patientSignIn" class="btn_1 rounded yellow">Patient Login</a>
+                    <a href="{{route('patientSignin')}}" class="btn_1 rounded yellow">Patient Login</a>
                     <a href="#wizard_container" class="btn_1 rounded mobile_btn yellow">Start Now!</a>
                     <a href="#0" id="more_info" data-toggle="modal" data-target="#more-info"><i class="pe-7s-info"></i></a>
                 </div>

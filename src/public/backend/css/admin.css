@@ -781,6 +781,7 @@ select.form-control:not([size]):not([multiple]) {
 .approved,
 .cancel,
 .pending,
+.treated,
 .read,
 .unread {
     -webkit-border-radius: 50px;
@@ -817,6 +818,11 @@ select.form-control:not([size]):not([multiple]) {
 
 .pending {
     background-color: #fd7e14
+}
+
+
+.treated {
+    background-color: #28a745
 }
 
 .white-popup {
