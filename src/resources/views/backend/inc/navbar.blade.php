@@ -22,7 +22,7 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseProfile">
                             <li>
-                                <a href="{{config('app.url')}}/profile">View profile</a>
+                                <a href="{{route('specialistProfile')}}">View profile</a>
                             </li>
                             <li>
                                 <a href="{{config('app.url')}}/reset">Change Password</a>
@@ -36,7 +36,7 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapsePatient">
                             <li>
-                                <a href="{{config('app.url')}}/patient">Patient Records</a>
+                                <a href="{{route('record')}}">Patient Records</a>
                             </li>
                             <li>
                                 <a href="{{config('app.url')}}/phq9">View PHQ-9 Result</a>
@@ -53,10 +53,10 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseTreatment">
                             <li>
-                                <a href="{{config('app.url')}}/Tcreate">Add New Treatment</a>
+                                <a href="{{route('addtreatment')}}">Add New Treatment</a>
                             </li>
                             <li>
-                                <a href="{{config('app.url')}}/treatment">Treatment Record</a>
+                                <a href="{{route('treatments')}}">Treatment Record</a>
                             </li>
                             <li>
                                 <a href="{{config('app.url')}}/Tsearch">Quick Search</a>
@@ -70,10 +70,10 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseSchedule">
                             <li>
-                                <a href="{{config('app.url')}}/newschedule">Add New Schedule</a>
+                                <a href="{{route('newschedule')}}">Add New Schedule</a>
                             </li>
                             <li>
-                                <a href="{{config('app.url')}}/schedule">Schedule Record</a>
+                                <a href="{{route('schedules')}}">Schedule Record</a>
                             </li>
                             <li>
                                 <a href="#">Quick Search</a>
@@ -87,7 +87,7 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseComplaint">
                             <li>
-                                <a href="{{config('app.url')}}/complaintrecord">Complaint Record</a>
+                                <a href="{{route('complains')}}">Complaint Record</a>
                             </li>
                             <li>
                                 <a href="{{config('app.url')}}/complaintsearch">Quick Search</a>

@@ -135,7 +135,7 @@ class SpecialistController extends Controller
 
     public function profile(Request $request)
     {
-        libUtils::checkSession($request);
+        libUtils::checkSession($request); 
         //echo session('fullName')[0];
         $data = DB::select('select * from mhad_specialists where status = 1 AND docRegNo = ?', [session('docRegNo')[0]]);
         return view('backend.specialist.profile')->with('data', $data[0]);

@@ -31,8 +31,8 @@
             <p>© <?=@date('Y');?> BuildForSDG Team-049 MHAD</p>
             <ul>
                 <li><a href="{{config('app.url')}}/adminSignIn" class="animated_link">Admin Login</a></li>
-                <li><a href="{{config('app.url')}}/doctorSignIn" class="animated_link">Doctor Login</a></li> 
-                <li><a href="{{config('app.url')}}/specialist" class="animated_link">Doctor SignUp</a></li>
+                <li><a href="{{route('specialistLogin')}}" class="animated_link">Doctor Login</a></li> 
+                <li><a href="{{route('specialistRegister')}}" class="animated_link">Doctor SignUp</a></li>
             </ul>
         </footer>
         <!-- end footer-->

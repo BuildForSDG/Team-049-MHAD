@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\mhad_patientSchedule;
+use App\mhad_patient;
+use Auth;
+use DB;
+use Mail;
+use App\utils\libUtils;
 
 class PatientComplaintControllers extends Controller
 {
@@ -43,11 +49,24 @@ class PatientComplaintControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        libUtils::checkSession($request);
+        
+        $docRegNo = session('docRegNo')[0];
+    $data = DB::table('mhad_patient_complaints')
+    ->join('mhad_patients', 'mhad_patient_complaints.pregNo', '=', 'mhad_patients.pregNo')
+    ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_complaints.*')
+    ->where('mhad_patients.assignedDoctorID', '=', $docRegNo)
+    ->orderByRaw('mhad_patients.id DESC')
+    ->paginate(2);
+       
+        if($data) {
+            return view('backend.specialist.complaints')->with('data', $data);
+        } else {
+            return view('backend.specialist.complaints')->with('error', 'No record');
+        }
     }
-
     /**
      * Show the form for editing the specified resource.
      *
