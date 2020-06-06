@@ -54,12 +54,12 @@ class PatientComplaintControllers extends Controller
         libUtils::checkSession($request);
         
         $docRegNo = session('docRegNo')[0];
-    $data = DB::table('mhad_patient_complaints')
-    ->join('mhad_patients', 'mhad_patient_complaints.pregNo', '=', 'mhad_patients.pregNo')
-    ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_complaints.*')
-    ->where('mhad_patients.assignedDoctorID', '=', $docRegNo)
-    ->orderByRaw('mhad_patients.id DESC')
-    ->paginate(2);
+        $data = DB::table('mhad_patient_complaints')
+        ->join('mhad_patients', 'mhad_patient_complaints.pregNo', '=', 'mhad_patients.pregNo')
+        ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_complaints.*')
+        ->where('mhad_patients.assignedDoctorID', '=', $docRegNo)
+        ->orderByRaw('mhad_patients.id DESC')
+        ->paginate(2);
        
         if($data) {
             return view('backend.specialist.complaints')->with('data', $data);

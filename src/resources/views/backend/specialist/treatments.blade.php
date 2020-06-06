@@ -13,14 +13,6 @@
 		<div class="box_general">
 			<div class="header_box">
 				<h2 class="d-inline-block">Treatments List</h2>
-				<div class="filter">
-					<select name="orderby" class="selectbox">
-						<option value="Any status">Any status</option>
-						<option value="Approved">Approved</option>
-						<option value="Pending">Pending</option>
-						<option value="Cancelled">Cancelled</option>
-					</select>
-				</div>
 			</div>
 			<div class="list_general">
 				<ul>

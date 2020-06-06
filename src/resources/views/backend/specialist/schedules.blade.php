@@ -1,58 +1,52 @@
 @extends('backend.layouts.app')
 @section('content')
     <!-- Icon Cards-->
-    
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="{{config('app.url')}}/Admin">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Schedules List</li>
-      </ol>
-		<div class="box_general">
-			<div class="header_box">
-				<h2 class="d-inline-block">Schedules List</h2>
-				<div class="filter">
-					<select name="orderby" class="selectbox">
-						<option value="Any status">Any status</option>
-						<option value="Approved">Approved</option>
-						<option value="Pending">Pending</option>
-						<option value="Cancelled">Cancelled</option>
-					</select>
-				</div>
-			</div>
-			<div class="list_general">
-				<ul>
-                    @if(count($data) > 0)
-                        @foreach ($data as $datas)
-                            <li>
-                                <figure><img src="img/avatar1.jpg" alt=""></figure>
-                                @if($datas->schStatus == '0')
-                                <h4>{{$datas->fullName}} <i class="pending">
-                                    Pending</i></h4>
-                                    @elseif ($datas->schStatus == '1')
-                                    <h4>{{$datas->id}} <i class="treated">
-                                        Treated
-                                </i></h4>
-                                @endif
-                                <ul class="booking_details">
-                                    <li><strong>Patient Reg. No</strong> {{$datas->pregNo}}</li>
-                                    <li><strong>Schedule Date</strong> {{$datas->schDate}}</li>
-                                    <li><strong>Schedule Venue</strong> {{$datas->schVenue}}</li>
-                                    <li><strong>Schedule Purpose</strong> {{$datas->schPurpose}}</li>
-                                    <li><strong>Doctor's Comment</strong> {{$datas->docComment}}</li> 
-                                </ul>
-                            </li>
-                        @endforeach
-                    @endif
-				</ul>
-			</div>
-		</div>
-		<!-- /box_general-->
-		<nav aria-label="...">
-            {{$data->links()}}
-		</nav>
-		<!-- /pagination-->
-      </div>
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+              <a href="{{route('Admin')}}">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active">Schedules List</li>
+            </ol>
+              <!-- Example DataTables Card-->
+            <div class="card mb-3">
+              <div class="card-header">
+                <i class="fa fa-table"></i> Schedules List</div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>Reg. #</th>
+                        <th>Name</th>
+                        <th>Schedule Date</th>
+                        <th>Schedule Venue</th>
+                        <th>Schedule Purpose</th>
+                        <th>Doctor's Comment</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      @if(count($data) > 0)
+                      @foreach ($data as $datas)
+                      <tr>
+                          <td>{{$datas->pregNo}}</th>
+                          <td>{{$datas->fullName}}</th>
+                          <td>{{$datas->schDate}}</td>
+                          <td>{{$datas->schVenue}}</th>
+                          <td>{{$datas->schPurpose}}</td>
+                          <td>{{$datas->docComment}}</td>
+                      </tr>
+                      @endforeach
+                      @endif
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card-footer small text-muted">{{$data->links()}}</div>
+            </div>
+            <!-- /tables-->
+            </div>
+
 @endsection              

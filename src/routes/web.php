@@ -40,7 +40,7 @@ Route::POST('/specialist', 'SpecialistController@specialistRegister');
 
 Route::POST('/phq9', 'PatientsPHQControllers@store'); 
 
-Route::get('/Admin', 'backendControllers@dashboad');
+Route::get('/Admin', 'backendControllers@dashboad')->name('Admin');
 Route::get('/logout', 'backendControllers@logout')->name('logout');
 
 Route::middleware('specialist')->group(function () {
@@ -51,8 +51,9 @@ Route::middleware('specialist')->group(function () {
 
     Route::resource('/patient', 'PatientManagementControllers');
     Route::get('/patient', 'PatientManagementControllers@index')->name('record');
+    Route::POST('/patient', 'PatientManagementControllers@index')->name('record');
     Route::get('/phq9', 'PatientManagementControllers@phq9Results')->name('phq9');
-    Route::get('/patientprofile', 'PatientManagementControllers@patientProfile');
+    Route::get('/qpatient', 'PatientManagementControllers@search')->name('quicksearch');
 
     Route::resource('treatment', 'PatientTreatmentControllers@index'); 
     Route::get('/tcreate', 'PatientTreatmentControllers@create')->name('addtreatment');
@@ -62,6 +63,8 @@ Route::middleware('specialist')->group(function () {
 
     Route::get('newschedule', 'PatientFollowUpControllers@create')->name('newschedule');
     Route::post('/newschedule', 'PatientFollowUpControllers@store');
+    Route::post('/searchschedule', 'PatientFollowUpControllers@show');
+    Route::get('/searchschedule', 'PatientFollowUpControllers@search')->name('searchschedule');
     Route::get('schedule', 'PatientFollowUpControllers@show')->name('schedules');
 
 

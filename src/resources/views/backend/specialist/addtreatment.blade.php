@@ -1,49 +1,59 @@
 @extends('backend.layouts.app')
 @section('content')
-    <!-- Icon Cards-->
-    
-<div class="container-fluid">
-    <!-- Breadcrumbs-->
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="{{config('app.url')}}/Admin">Dashboard</a>
-      </li>
-      <li class="breadcrumb-item active">Add Treatments</li>
-    </ol>
-    {!! Form::open(['url' => '/tcreate', 'method'=>'POST']) !!}
-    <div class="step">
-        <h3 class="main_question"><i class="arrow_right"></i>Add Treatment Details</h3>
-        <div class="form-group add_top_30">
-            <label for="pregNo">Patient Registration Number</label>
-            <select name="pregNo" class="form-control" required>
-                @foreach ($data as $patients)
-                <option></option>
-                <option value="{{$patients->pregNo}}">{{$patients->fullName}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-                <label for="targetSymptom">Target Symptom</label>
-                <input type="text" name="targetSymptom" id="targetSymptom" class="form-control" required>
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{config('app.url')}}/Admin">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Treatments</li>
+        </ol>
+        {!! Form::open(['url' => '/tcreate', 'method'=>'POST']) !!}
+        <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+                  <h2><i class="fa fa-file"></i>Add Treatment Details</h2>
             </div>
-        <div class="form-group">
-            <label for="prescDesc">Prescription</label>
-            <input type="text" name="prescDesc" id="prescDesc" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="comment">Comment</label>
-            <input type="text" name="comment" id="comment" class="form-control" required>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-4">
-                <div class="form-group">
-                    <input type="submit" name="submit" value="Submit" class="btn_1" />
-                </div>
+            <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                            <label for="pregNo">Patient Registration Number</label>
+                            <select name="pregNo" class="form-control" required>
+                                <option></option>
+                                @foreach ($data as $patients)
+                                <option value="{{$patients->pregNo}}">{{$patients->fullName}}</option>
+                                @endforeach
+                            </select>
+                      </div>
+                  </div>
             </div>
+            <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                            <label for="targetSymptom">Target Symptom</label>
+                            <input type="text" name="targetSymptom" id="targetSymptom" class="form-control" required>
+                      </div>
+                  </div>
+            </div>
+            <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                            <label for="prescDesc">Prescription</label>
+                            <textarea name="prescDesc" id="prescDesc" class="form-control"></textarea>
+                      </div>
+                  </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label for="comment">Comment</label>
+                                <textarea name="comment" id="comment" class="form-control" required></textarea>
+                        </div>
+                    </div>
+              </div>
+              <!-- /row-->
+          </div>
+          <!-- /box_general-->
+          <p><input type="submit" name="submit" value="Submit" class="btn_1 medium" /></p>
+          {!! Form::close() !!}
         </div>
-    </div>
-    <!-- /bottom-wizard -->
-{!! Form::close() !!}
-    </div>
-@endsection        
+    @endsection            

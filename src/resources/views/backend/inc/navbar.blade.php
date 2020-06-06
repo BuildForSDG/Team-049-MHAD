@@ -39,11 +39,12 @@
                                 <a href="{{route('record')}}">Patient Records</a>
                             </li>
                             <li>
-                                <a href="{{config('app.url')}}/phq9">View PHQ-9 Result</a>
-                            </li>
+                                    <a href="{{route('quicksearch')}}">Patient Quick Search</a>
+                                </li>
                             <li>
-                                <a href="{{config('app.url')}}/psearch">Patient Quick Search</a>
+                                <a href="{{route('phq9')}}">View PHQ-9 Result</a>
                             </li>
+                            
                         </ul>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient Treatment">
@@ -76,7 +77,7 @@
                                 <a href="{{route('schedules')}}">Schedule Record</a>
                             </li>
                             <li>
-                                <a href="#">Quick Search</a>
+                                <a href="{{route('searchschedule')}}">Quick Search</a>
                             </li>
                         </ul>
                     </li>
@@ -274,7 +275,7 @@
             <ul class="navbar-nav ml-auto">
                 @switch(session('userType')[0])
                     @case('Specialist')
-                        <li class="nav-item dropdown">
+                        <!--li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-fw fa-envelope"></i>
                                 <span class="d-lg-none">Messages
@@ -323,7 +324,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item small" href="#">View all alerts</a>
                             </div>
-                        </li>
+                        </li-->
                 @break
                 @case('Patient')
                         

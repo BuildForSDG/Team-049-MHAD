@@ -35,6 +35,16 @@ class PatientFollowUpControllers extends Controller
 
         return view('backend.specialist.addschedule')->with('data', $data);
     }
+
+    public function search(Request $request)
+    {
+        libUtils::checkSession($request);
+        
+        $data = DB::select('select * from mhad_patients  where assignedDoctorID = ?', [session('docRegNo')[0]]);
+
+        return view('backend.specialist.searchschedule')->with('data', $data);
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -75,20 +85,27 @@ class PatientFollowUpControllers extends Controller
         libUtils::checkSession($request);
         
         $docRegNo = session('docRegNo')[0];
-    $data = DB::table('mhad_patient_schedules')
-    ->join('mhad_patients', 'mhad_patient_schedules.pregNo', '=', 'mhad_patients.pregNo')
-    ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_schedules.*')
-    ->where('mhad_patients.assignedDoctorID', '=', $docRegNo)
-    ->orderByRaw('mhad_patients.id DESC')
-    ->paginate(2);
+        if($request->pregNo != '') {
+            $search[] = ['mhad_patients.pregNo', '=', $request->pregNo];
+        }
+        if($request->schDate != '') {
+            $search[] = ['mhad_patient_schedules.schDate', '=', $request->schDate];
+        }
+        $search[] = ['mhad_patients.assignedDoctorID', '=', $docRegNo];
+        $data = DB::table('mhad_patient_schedules')
+        ->join('mhad_patients', 'mhad_patient_schedules.pregNo', '=', 'mhad_patients.pregNo')
+        ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_schedules.*')
+        ->where($search)
+        ->orderByRaw('mhad_patients.id DESC')
+        ->paginate(2);
        
-        if($data) {
+        if(count($data) > 0) {
             return view('backend.specialist.schedules')->with('data', $data);
         } else {
-            return view('backend.specialist.schedules')->with('error', 'No record');
+            return view('backend.specialist.schedules')->with('data', $data);
         }
     }
-
+    
     
 
     /**
