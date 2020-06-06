@@ -72,14 +72,16 @@ Route::middleware('specialist')->group(function () {
     Route::get('complaint', 'PatientComplaintControllers@show')->name('complains');
 });
 Route::middleware('patient')->group(function () {
-    Route::get('/myprofile', 'PatientController@profile');
+    Route::get('/myprofile', 'PatientController@profile')->name('myprofile');
+    Route::POST('/myprofile', 'PatientController@profileUpdate');
     Route::get('/preset', 'PatientController@reset');
     Route::post('/preset', 'PatientController@resetUpdate');
+
 });
 Route::middleware('admin')->group(function () {
-    Route::get('/myprofile', 'PatientController@profile');
-    Route::get('/preset', 'PatientController@reset');
-    Route::post('/preset', 'PatientController@resetUpdate');
+    Route::get('/adminprofile', 'PatientController@profile');
+    Route::get('/admreset', 'PatientController@reset');
+    Route::post('/admreset', 'PatientController@resetUpdate');
 }); 
 
 Route::get('newcomplain', 'PatientComplaintControllers@create')->name('newcomplain');

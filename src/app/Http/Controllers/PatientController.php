@@ -11,11 +11,7 @@ use Mail;
 use App\utils\libUtils;
 
 class PatientController extends Controller
-{   
-    public function profile(Request $request)
-    {
-        echo "Patient".session('fullName')[0];
-    }
+{       
     public function patientSignIn(Request $request)
     {
         $this->validate($request, [
@@ -83,6 +79,40 @@ class PatientController extends Controller
             return back()->with('error', 'Error resetting your password, pls try again');
         }
     }
+
+    public function profile(Request $request)
+    {
+        libUtils::checkSession($request); 
+        //echo session('fullName')[0];
+        $data = DB::select('select * from mhad_specialists where status = 1 AND docRegNo = ?', [session('docRegNo')[0]]);
+        return view('backend.specialist.profile')->with('data', $data[0]);
+    }
+    
+    public function profileUpdate(Request $request)
+    {
+        libUtils::checkSession($request);
+        $this->validate($request, [
+            'phoneNumber' => 'required',
+            'address' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'zip_code' => 'required'
+        ]);
+        $phoneNumber = $request->phoneNumber;
+        $address = $request->address;
+        $state = $request->state;
+        $country = $request->country;
+        $zip_code = $request->zip_code;
+        $result = DB::update('update mhad_specialists set `phoneNumber` = "'.$phoneNumber.'", `address` = "'.$address.'", `state` = "'.$state.'", `country` = "'.$country.'", `zip_code` = "'.$zip_code.'" where docRegNo = ?', [session('docRegNo')[0]]);
+        
+        if($result){
+            return back()->with('success', 'Profile updated successfully');
+        } else {
+            return back()->with('error', 'Error updating your profile, pls try again');
+        }
+        //
+    }
+
     public function reset(Request $request)
     {
         libUtils::checkSession($request);
