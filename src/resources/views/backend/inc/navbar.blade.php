@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
         <a class="navbar-brand" href="{{config('app.url')}}/Admin">
-            <img src="backend/img/logo.png" data-retina="true" alt="" width="163" height="36">
+            <img src="{{config('app.url')}}/backend/img/logo.png" data-retina="true" alt="" width="163" height="36">
         </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -118,9 +118,6 @@
                             </a>
                             <ul class="sidenav-second-level collapse" id="collapsePatient">
                                 <li>
-                                    <a href="{{config('app.url')}}/new_phq9">New Test</a>
-                                </li>
-                                <li>
                                     <a href="{{config('app.url')}}/phq9_result">View PHQ-9 Result</a>
                                 </li>
                             </ul>
@@ -134,9 +131,6 @@
                                 <li>
                                     <a href="{{config('app.url')}}/mytreatment">Treatment Record</a>
                                 </li>
-                                <li>
-                                    <a href="{{config('app.url')}}/myTsearch">Quick Search</a>
-                                </li>
                             </ul>
                         </li>
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Followup">
@@ -149,7 +143,7 @@
                                     <a href="{{config('app.url')}}/myschedule">Schedule Record</a>
                                 </li>
                                 <li>
-                                    <a href="{{config('app.url')}}/myschedule_search">Quick Search</a>
+                                    <a href="{{config('app.url')}}/searchmyschedule">Quick Search</a>
                                 </li>
                             </ul>
                         </li>
@@ -165,9 +159,9 @@
                                 <li>
                                     <a href="{{config('app.url')}}/complaintrecord">Complaint Record</a>
                                 </li>
-                                <li>
+                                <!--li>
                                     <a href="{{config('app.url')}}/complaintsearch">Quick Search</a>
-                                </li>
+                                </li -->
                             </ul>
                         </li>
                         @break
@@ -182,7 +176,7 @@
                                     <a href="{{config('app.url')}}/adminprofile">View profile</a>
                                 </li>
                                 <li>
-                                    <a href="{{config('app.url')}}/adminreset">Change Password</a>
+                                    <a href="{{config('app.url')}}/admreset">Change Password</a>
                                 </li>
                             </ul>
                         </li>
@@ -193,11 +187,11 @@
                             </a>
                             <ul class="sidenav-second-level collapse" id="collapsePatient">
                                 <li>
-                                    <a href="{{config('app.url')}}/phq9view">View Record</a>
+                                    <a href="{{route('phq9')}}">View Record</a>
                                 </li>
-                                <li>
+                                <!--li>
                                     <a href="{{config('app.url')}}/phq9search">Quick Search</a>
-                                </li>
+                                </li-->
                             </ul>
                         </li>
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Specialist Record">
@@ -209,9 +203,6 @@
                                 <li>
                                     <a href="{{config('app.url')}}/specialistrecord">View Record</a>
                                 </li>
-                                <li>
-                                    <a href="{{config('app.url')}}/specialistsearch">Quick Search</a>
-                                </li>
                             </ul>
                         </li>
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient Record">
@@ -221,10 +212,10 @@
                             </a>
                             <ul class="sidenav-second-level collapse" id="patientrecord">
                                 <li>
-                                    <a href="{{config('app.url')}}/patientrecord">View Record</a>
+                                    <a href="{{config('app.url')}}/patient">View Record</a>
                                 </li>
                                 <li>
-                                    <a href="{{config('app.url')}}/patientsearch">Quick Search</a>
+                                    <a href="{{config('app.url')}}/qpatient">Quick Search</a>
                                 </li>
                             </ul>
                         </li>
@@ -235,13 +226,14 @@
                             </a>
                             <ul class="sidenav-second-level collapse" id="collapseComplaint">
                                 <li>
-                                    <a href="{{config('app.url')}}/complaintrecord">Complaint Record</a>
+                                    <a href="{{config('app.url')}}/complaint">Complaint Record</a>
                                 </li>
                                 <li>
                                     <a href="{{config('app.url')}}/complaintsearch">Quick Search</a>
                                 </li>
                             </ul>
                         </li>
+                        @if(session('role')[0] == 'Supper Admin')
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User Management">
                                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#usermanagement" data-parent="#exampleAccordion">
                                     <i class="fa fa-fw fa-user"></i>
@@ -249,16 +241,14 @@
                                 </a>
                                 <ul class="sidenav-second-level collapse" id="usermanagement">
                                     <li>
-                                        <a href="{{config('app.url')}}/adduser">Add New User</a>
+                                        <a href="{{config('app.url')}}/addprofile">Add New User</a>
                                     </li>
                                     <li>
-                                            <a href="{{config('app.url')}}/userrecord">User Record</a>
-                                        </li>
-                                    <li>
-                                        <a href="{{config('app.url')}}/usersearch">Quick Search</a>
+                                        <a href="{{config('app.url')}}/adminrecord">User Record</a>
                                     </li>
                                 </ul>
                             </li>
+                        @endif
                         @break
                     @default
                         
@@ -273,67 +263,13 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                @switch(session('userType')[0])
-                    @case('Specialist')
-                        <!--li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-fw fa-envelope"></i>
-                                <span class="d-lg-none">Messages
-                                    <span class="badge badge-pill badge-primary">12 New</span>
-                                </span>
-                                <span class="indicator text-primary d-none d-lg-block">
-                                    <i class="fa fa-fw fa-circle"></i>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">New Patient Complain:</h6>
-
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">
-                                    <strong>David Miller</strong>
-                                    <span class="small float-right text-muted">11:21 AM</span>
-                                    <div class="dropdown-message small">I took the drugs and I'm getting better</div>
-                                </a>
-                                
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item small" href="#">View all messages</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-fw fa-bell"></i>
-                                <span class="d-lg-none">Alerts
-                                    <span class="badge badge-pill badge-warning">1 New</span>
-                                </span>
-                                <span class="indicator text-warning d-none d-lg-block">
-                                    <i class="fa fa-fw fa-circle"></i>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">Patient Alerts:</h6>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">
-                                    <span class="text-success">
-                                        <strong>
-                                        <i class="fa fa-long-arrow-up fa-fw"></i>New Patient Assigned</strong>
-                                    </span>
-                                    <span class="small float-right text-muted">11:21 AM</span>
-                                    <div class="dropdown-message small">Godwin James - 60%.</div>
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item small" href="#">View all alerts</a>
-                            </div>
-                        </li-->
-                @break
-                @case('Patient')
-                        
-                @break;
-                    @default
-                        
-                @endswitch
                 <li class="nav-item">
-                    <a class="nav-link mr-lg-2" href="{{config('app.url')}}/profile" >
+                    <a class="nav-link mx-lg-4">
+                        <i class="fa fa-fw fa-book"></i>{{session('userDesc')[0]}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mr-lg-4" >
                         <i class="fa fa-fw fa-user"></i>{{session('fullName')[0]}}
                     </a>
                 </li>

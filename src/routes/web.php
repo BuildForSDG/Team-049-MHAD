@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/**
-Route::get('/', function () {
-    return view('welcome');
-});
- */
 
 Route::get('/', 'PagesControllers@index'); 
 
@@ -49,12 +44,6 @@ Route::middleware('specialist')->group(function () {
     Route::get('/reset', 'SpecialistController@reset');
     Route::post('/reset', 'SpecialistController@resetUpdate');
 
-    Route::resource('/patient', 'PatientManagementControllers');
-    Route::get('/patient', 'PatientManagementControllers@index')->name('record');
-    Route::POST('/patient', 'PatientManagementControllers@index')->name('record');
-    Route::get('/phq9', 'PatientManagementControllers@phq9Results')->name('phq9');
-    Route::get('/qpatient', 'PatientManagementControllers@search')->name('quicksearch');
-
     Route::resource('treatment', 'PatientTreatmentControllers@index'); 
     Route::get('/tcreate', 'PatientTreatmentControllers@create')->name('addtreatment');
     Route::get('/treatment', 'PatientTreatmentControllers@show')->name('treatments');
@@ -67,22 +56,54 @@ Route::middleware('specialist')->group(function () {
     Route::get('/searchschedule', 'PatientFollowUpControllers@search')->name('searchschedule');
     Route::get('schedule', 'PatientFollowUpControllers@show')->name('schedules');
 
-
-    Route::resource('complaintsearch', 'PatientComplaintControllers@search');
-    Route::get('complaint', 'PatientComplaintControllers@show')->name('complains');
 });
 Route::middleware('patient')->group(function () {
     Route::get('/myprofile', 'PatientController@profile')->name('myprofile');
     Route::POST('/myprofile', 'PatientController@profileUpdate');
     Route::get('/preset', 'PatientController@reset');
     Route::post('/preset', 'PatientController@resetUpdate');
+    Route::get('/phq9_result', 'PatientController@phq9Results')->name('phq9_result');
+    Route::get('/mytreatment', 'PatientController@mytreatment')->name('mytreatment'); 
+    Route::get('/myschedule', 'PatientController@myschedule')->name('myschedule'); 
+    Route::POST('/searchmyschedule', 'PatientController@myschedule')->name('searchmyschedule'); 
+    Route::get('/searchmyschedule', 'PatientController@search');
+    Route::resource('/feedback', 'PatientController');
+    
+    Route::resource('complaintrecord', 'complaintController');
+    Route::get('addcomplaint', 'complaintController@create');
+    Route::resource('savecomplaint', 'complaintController');
 
 });
 Route::middleware('admin')->group(function () {
-    Route::get('/adminprofile', 'PatientController@profile');
-    Route::get('/admreset', 'PatientController@reset');
-    Route::post('/admreset', 'PatientController@resetUpdate');
+    Route::get('/adminprofile', 'adminControllers@profile');
+    Route::post('/adminprofile', 'adminControllers@profileUpdate');
+    Route::get('/admreset', 'adminControllers@reset')->name('admreset');
+    Route::post('/admreset', 'adminControllers@resetUpdate');
+    Route::get('/addprofile', 'adminControllers@addprofile');
+    Route::post('/addprofile', 'adminControllers@create');
+    Route::get('/adminrecord', 'adminControllers@adminrecord');
+    Route::get('/edit/{ID}', 'adminControllers@editprofile');
+    Route::get('/delete/{ID}', 'adminControllers@deleteprofile');
+    Route::post('/updateprofile', 'adminControllers@updateprofile');
+    Route::get('/phq9', 'PatientManagementControllers@phq9Results')->name('phq9');
+    Route::get('/specialistrecord', 'adminControllers@specialistrecord');
+    Route::get('/editmedic/{ID}', 'adminControllers@editmedic');
+    Route::post('/updatemedic', 'adminControllers@updatemedic');        
+    
 }); 
+
+Route::get('/editpatient/{ID}', 'PatientManagementControllers@editpatient');
+Route::POST('/patientupdate', 'PatientManagementControllers@patientupdate');
+
+Route::resource('/patient', 'PatientManagementControllers');
+Route::get('/patient', 'PatientManagementControllers@index')->name('record');
+Route::POST('/patient', 'PatientManagementControllers@index')->name('record');
+Route::get('/phq9', 'PatientManagementControllers@phq9Results')->name('phq9');
+Route::get('/qpatient', 'PatientManagementControllers@search')->name('quicksearch');
+
+Route::get('complaintsearch', 'PatientComplaintControllers@search');
+Route::get('complaint', 'PatientComplaintControllers@show')->name('complains');
+Route::POST('complaint', 'PatientComplaintControllers@show');
 
 Route::get('newcomplain', 'PatientComplaintControllers@create')->name('newcomplain');
 Route::post('/newcomplain', 'PatientComplaintControllers@store');

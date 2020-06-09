@@ -81,7 +81,7 @@ class PatientTreatmentControllers extends Controller
         ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_treatments.*')
         ->where('mhad_patients.assignedDoctorID', '=', $docRegNo)
         ->orderByRaw('mhad_patients.id DESC')
-        ->paginate(2);
+        ->paginate(10);
        
         if($data) {
             return view('backend.specialist.treatments')->with('data', $data);

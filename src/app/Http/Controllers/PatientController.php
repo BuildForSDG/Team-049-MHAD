@@ -11,7 +11,25 @@ use Mail;
 use App\utils\libUtils;
 
 class PatientController extends Controller
-{       
+{   
+    public function index(Request $request)
+    {
+        libUtils::checkSession($request);
+        
+        $pregNo = session('pregNo')[0];
+        $data = DB::table('mhad_patient_treatments')
+        ->join('mhad_patients', 'mhad_patient_treatments.pregNo', '=', 'mhad_patients.pregNo')
+        ->select('mhad_patients.id', 'mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_treatments.*')
+        ->where('mhad_patients.pregNo', '=', $pregNo)
+        ->orderByRaw('mhad_patients.id DESC')
+        ->paginate(10);
+       
+        if(count($data) > 0) {
+            return view('backend.patient.treatments')->with('data', $data);
+        } else {
+            return view('backend.patient.treatments')->with('error', 'No record');
+        }
+    }
     public function patientSignIn(Request $request)
     {
         $this->validate($request, [
@@ -84,8 +102,8 @@ class PatientController extends Controller
     {
         libUtils::checkSession($request); 
         //echo session('fullName')[0];
-        $data = DB::select('select * from mhad_specialists where status = 1 AND docRegNo = ?', [session('docRegNo')[0]]);
-        return view('backend.specialist.profile')->with('data', $data[0]);
+        $data = DB::select('select * from mhad_patients where pregNo = ?', [session('pregNo')[0]]);
+        return view('backend.patient.profile')->with('data', $data[0]);
     }
     
     public function profileUpdate(Request $request)
@@ -103,7 +121,7 @@ class PatientController extends Controller
         $state = $request->state;
         $country = $request->country;
         $zip_code = $request->zip_code;
-        $result = DB::update('update mhad_specialists set `phoneNumber` = "'.$phoneNumber.'", `address` = "'.$address.'", `state` = "'.$state.'", `country` = "'.$country.'", `zip_code` = "'.$zip_code.'" where docRegNo = ?', [session('docRegNo')[0]]);
+        $result = DB::update('update mhad_patients set `phoneNumber` = "'.$phoneNumber.'", `address` = "'.$address.'", `state` = "'.$state.'", `country` = "'.$country.'", `zip_code` = "'.$zip_code.'" where pregNo = ?', [session('pregNo')[0]]);
         
         if($result){
             return back()->with('success', 'Profile updated successfully');
@@ -132,6 +150,104 @@ class PatientController extends Controller
             return back()->with('success', 'Password changed successfully');
         } else {
             return back()->with('error', 'Error changing password, pls try again');
+        }
+    }
+    public function phq9Results(Request $request)
+    {
+        libUtils::checkSession($request);
+        $pregNo = session('pregNo')[0];
+        //var_dump($request->input());
+        $search[] = ['mhad_patients.pregNo', '=', $pregNo];
+        
+        $data = DB::table('mhad_patients')
+        ->join('mhad_patient_diagnoses', 'mhad_patients.pregNo', '=', 'mhad_patient_diagnoses.pregNo')
+        ->join('mhad_specialists', 'mhad_patients.assignedDoctorID', '=', 'mhad_specialists.docRegNo')
+        ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patients.age', 'mhad_patients.gender', 'mhad_patients.dateRegistered_at', 'mhad_patients.treatmentStatus', 'mhad_patient_diagnoses.phqResult', 'mhad_patient_diagnoses.diagnosisLevel', 'mhad_patient_diagnoses.diagnoseSuggest','mhad_specialists.fullName AS SPfullName','mhad_specialists.emailAddress AS SPemailAddress','mhad_specialists.phoneNumber AS SPphoneNumber','mhad_specialists.occupation AS SPoccupation','mhad_specialists.specialty AS SPspecialty')
+        ->where($search)
+        ->orderByRaw('mhad_patients.id DESC')
+        ->paginate(10);
+        
+        if(count($data) > 0) {
+            return view('backend.patient.record')->with('data', $data);
+        } else {
+            return view('backend.patient.record')->with('data', $data);
+        }
+    }
+
+    public function mytreatment(Request $request)
+    {
+        libUtils::checkSession($request);
+        
+        $pregNo = session('pregNo')[0];
+        $data = DB::table('mhad_patient_treatments')
+        ->join('mhad_patients', 'mhad_patient_treatments.pregNo', '=', 'mhad_patients.pregNo')
+        ->select('mhad_patients.id', 'mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_treatments.*')
+        ->where('mhad_patients.pregNo', '=', $pregNo)
+        ->orderByRaw('mhad_patients.id DESC')
+        ->paginate(10);
+       
+        if(count($data) > 0) {
+            return view('backend.patient.treatments')->with('data', $data);
+        } else {
+            return back()->with('error', 'No record found');
+            //$data = array();
+            //return view('backend.patient.treatments')->with('data', $data);
+        }
+    }
+
+    public function myschedule(Request $request)
+    {
+        libUtils::checkSession($request);
+        
+        $pregNo = session('pregNo')[0];
+        if($request->pregNo != '') {
+            $search[] = ['mhad_patients.pregNo', '=', $request->pregNo];
+        }
+        if($request->schDate != '') {
+            $search[] = ['mhad_patient_schedules.schDate', '=', $request->schDate];
+        }
+        $search[] = ['mhad_patients.pregNo', '=', $pregNo];
+        $data = DB::table('mhad_patient_schedules')
+        ->join('mhad_patients', 'mhad_patient_schedules.pregNo', '=', 'mhad_patients.pregNo')
+        ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_schedules.*')
+        ->where($search)
+        ->orderByRaw('mhad_patients.id DESC')
+        ->paginate(10);
+       
+        if(count($data) > 0) {
+            return view('backend.patient.schedules')->with('data', $data);
+        } else {
+            return view('backend.patient.schedules')->with('data', $data);
+        }
+    }
+    public function search(Request $request)
+    {
+        libUtils::checkSession($request);        
+        return view('backend.patient.searchschedule');
+    }
+
+    public function show($id)
+    {
+        //libUtils::checkSession($request);
+        $data = DB::table('mhad_patient_treatments')
+        ->select('id', 'pregNo', 'targetSymptom', 'prescDesc', 'dateTreated', 'comment', 'patientFeedback', 'updated_at', 'created_at', 'status')
+        ->where('id', '=', $id)
+        ->get();
+        if($data[0]) {
+            return view('backend.patient.addfeedback')->with('data', $data);
+        } else {
+            return back()->with('error', 'No record found');
+        }
+    }
+
+    public function store(Request $request)
+    {
+        libUtils::checkSession($request);
+        $result = DB::update('update mhad_patient_treatments set patientFeedback = "'.$request->patientFeedback.'" where id = ?', [$request->id]);
+        if($result) {
+            return back()->with('success', 'Treatment Feedback updated successfully');
+        } else {
+            return back()->with('error', 'Error updating Treatment Feedback');
         }
     }
 }

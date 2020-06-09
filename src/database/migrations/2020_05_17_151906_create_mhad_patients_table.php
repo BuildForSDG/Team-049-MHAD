@@ -21,6 +21,10 @@ class CreateMhadPatientsTable extends Migration
             $table->string('phoneNumber', 50);
             $table->string('age', 50);
             $table->string('gender', 50);
+            $table->text('address')->nullable();
+            $table->string('state', 150)->nullable();
+            $table->string('country', 150)->nullable();
+            $table->string('zip_code', 50)->nullable();
             $table->string('username', 100);
             $table->string('password');
             $table->char('require_treatment', 4);

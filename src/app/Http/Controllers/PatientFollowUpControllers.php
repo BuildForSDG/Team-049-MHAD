@@ -97,7 +97,7 @@ class PatientFollowUpControllers extends Controller
         ->select('mhad_patients.pregNo', 'mhad_patients.fullName', 'mhad_patients.emailAddress', 'mhad_patients.phoneNumber', 'mhad_patient_schedules.*')
         ->where($search)
         ->orderByRaw('mhad_patients.id DESC')
-        ->paginate(2);
+        ->paginate(10);
        
         if(count($data) > 0) {
             return view('backend.specialist.schedules')->with('data', $data);
