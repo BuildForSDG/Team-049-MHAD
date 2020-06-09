@@ -89,7 +89,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/specialistrecord', 'adminControllers@specialistrecord');
     Route::get('/editmedic/{ID}', 'adminControllers@editmedic');
     Route::post('/updatemedic', 'adminControllers@updatemedic');        
-    
+    Route::get('/logs', 'adminControllers@logs');
 }); 
 
 Route::get('/editpatient/{ID}', 'PatientManagementControllers@editpatient');

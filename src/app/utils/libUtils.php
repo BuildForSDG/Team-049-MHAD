@@ -26,6 +26,15 @@ class libUtils {
     {
         //var_dump($request->session());
         if($request->session()->has('userType')) {
+            $requestMethod = $request->method();
+            $requestString = $request->getRequestUri();
+            $requestResponseCode = http_response_code();
+            $requestTime = round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000);
+            $data = $requestMethod."\t\t".$requestString."\t\t".$requestResponseCode."\t\t".$requestTime."ms\n"; 
+            
+            DB::table('mhad_syslogs')->insert(
+                ['method' => $requestMethod, 'resources_url' => $requestString, 'response_status' => $requestResponseCode, 'response_time' => $requestTime, 'access_by' => session('userType')[0]]
+            );
             return true;
         } else {
             header("Location: ./");

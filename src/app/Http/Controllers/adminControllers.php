@@ -331,4 +331,20 @@ class adminControllers extends Controller
         }
         //
     }
+
+    public function logs(Request $request)
+    {
+        libUtils::checkSession($request);
+        $data = DB::table('mhad_syslogs')
+        ->select('method', 'resources_url', 'response_status', 'response_time', 'access_date', 'access_by')
+        ->orderByRaw('access_date DESC')
+        ->paginate(10);
+        
+        if(count($data) > 0) {
+            //$_REQUEST['page'] = 1;
+            return view('backend.admin.logs')->with('data', $data);
+        } else {
+            return back()->with('error', 'No log record');
+        }
+    }
 }

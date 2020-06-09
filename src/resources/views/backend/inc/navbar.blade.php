@@ -234,7 +234,7 @@
                             </ul>
                         </li>
                         @if(session('role')[0] == 'Supper Admin')
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User Management">
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User Management">
                                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#usermanagement" data-parent="#exampleAccordion">
                                     <i class="fa fa-fw fa-user"></i>
                                     <span class="nav-link-text">User Management</span>
@@ -248,6 +248,17 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User Management">
+                                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#systemlogs" data-parent="#exampleAccordion">
+                                        <i class="fa fa-fw fa-user"></i>
+                                        <span class="nav-link-text">System Logs</span>
+                                    </a>
+                                    <ul class="sidenav-second-level collapse" id="systemlogs">
+                                        <li>
+                                            <a href="{{config('app.url')}}/logs">System Logs Record</a>
+                                        </li>
+                                    </ul>
+                                </li>
                         @endif
                         @break
                     @default
